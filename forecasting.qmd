@@ -1,0 +1,1027 @@
+---
+title: "Forecasting"
+subtitle: "through time series analysis"
+author: "Robert Batzinger"
+date: "17-18 Dec 2024"
+editor: visual
+format:
+  revealjs:
+    theme: beige
+    footer: "Workshop on Forecasting"
+    slide-number: "c/t"
+    show-slide-number: all
+    logo: pyulogo.png
+    transitions: fade
+    toc: true
+    toc-depth: 1
+---
+
+# OVERVIEW:
+
+## Purpose of this workshop:
+* provide practical training in analysis of time series data
+* At the end of this workshop, student should be able to:
+   * create projections about the future based on trends and patterns
+   * establish the margin of expected error in projection.
+
+## Hidden agenda
+* attempt to resurrect the concept of undergraduate summit meetings/workshops
+
+* test materials and approaches to be used in subsequent workshops and seminars
+
+* Introduce advanced statistical computing techniques in R and Python
+
+* Create a group of student capable of competing in Kaggle competitions.
+
+## Why do we do this?
+
+**Job Opportunities for Math "nerds"**
+
+<small>
+
+I'm a recruiter at Outlier - a platform for training AI models in a wide variety of subject matters, including mathematics! Training projects include writing, ranking, and evaluating AI chatbot prompts related to your area of expertise. That’s why your LinkedIn profile stood out, as we're currently looking for Math Consultants with professional work experience OR a Bachelor’s degree.
+
+Some highlights from the job:
+
+-   Remote
+
+-   Earnings: Avg. USD\$19.5 to \$32.5 per hr
+
+-   Incredibly flexible hours that can fit around your schedule
+
+-   Have an impact in making LLMs safer, more accurate, and more reliable
+
+Click the link to apply!
+
+All the Best, The Outlier Team
+
+</small>
+
+##  General aspects of the workshop: 
+
+* 2 days : 17-18 Dec
+* 2 sessions : 9:30-12:30, 13:00-14:00
+* Venue: Ajarn Bob's Residence
+
+## What is needed:
+
+* Wifi and power hookup points will be provided
+* But participants should to bring:
+    * a notebook computer
+    * a notebook and a pen
+    * A time series data sample that you would like to analyze
+
+## A word about lunch
+
+* A table has been prepared to
+hold the lunch separate from the computers.
+* When we break for lunch, we will eat at a separate table
+* We will need to clean up after lunch before starting Session 2
+
+## Topics to be covered
+
+* Session 1: Introduction to
+Statistical Computing with R
+
+* Session 2: Time Series analysis
+
+* Session 3:  Regression analysis
+
+* Session 4: Data Smoothing and ARIMA
+
+
+# SESSION 1: Introduction to Statistical Computing with R
+
+## Install R and its IDE
+
+* Download and install R from [CRAN](https://cran.r-project.org/)
+
+* Download and install RStudio [RStudio](https://posit.co/download/rstudio-desktop/) 
+
+ 
+## Hands-on{.scrollable}
+
+```{r,fig.height=5,fig.width=7,echo=TRUE}
+plot(faithful)
+plot(AirPassengers)
+
+```
+
+## Data Import and Manipulation: {.scrollable}
+
+* read.csv(): Importing data from CSV files. 
+* read.table(): Importing data from delimited text files. 
+* read_excel(): Importing data from Excel files (using the readxl package). 
+* head(): Displaying the first few rows of a dataset. 
+* tail(): Displaying the last few rows of a dataset. 
+* str(): Getting a summary of the structure of a dataset.
+* summary(): Getting summary statistics for numerical variables. 
+* dim(): Getting the dimensions of a dataset (rows and columns). 
+* colnames(): Getting the names of the columns in a dataset.
+
+## Data Cleaning and Transformation {.scrollable}
+
+* Uses dplyr package: A powerful tool for data manipulation. 
+* filter(): Filtering rows based on conditions. 
+* select(): Selecting specific columns. 
+* mutate(): Creating new variables or modifying existing ones. 
+* arrange(): Sorting rows. 
+* group_by(): Grouping data 
+* summarize(): calculating summary statistics.
+
+* tidyr package: For tidying messy data. 
+* gather(): Converting wide-format data to long format. 
+* spread(): Converting long-format data to wide format. 
+* separate(): Splitting Columns 
+* unite(): Combining columns. 
+
+## Data Visualization: {.scrollable}
+
+* plot(): line and scatterplots
+* hist(): histogram
+
+* ggplot2 package: A flexible and powerful visualization library. 
+* ggplot(): Creating a basic plot. 
+* geom_point(): Creating scatter plots. 
+* geom_line(): Creating line plots. 
+* geom_bar(): Creating bar plots. 
+* geom_histogram(): Creating histograms. 
+
+* aes(): Mapping variables to aesthetic attributes. 
+
+## Statistical Analysis: {.scrollable}
+
+Base R functions: 
+
+* mean(): Calculating the mean.
+* median(): Calculating the median. 
+* sd(): Calculating the standard deviation. 
+* var(): Calculating the variance. 
+* cor(): Calculating the correlation between variables.
+
+Stats package:
+* t.test(): Performing t-tests.
+* anova(): Performing ANOVA.
+* lm(): Fitting linear models.
+
+
+Session 2: Regression analysis:
+time series analysis and forecasting:
+
+Core R Functions:
+
+ts(): Converts a numeric vector into a time series object. plot(): Visualizes time series data. diff(): Calculates the difference between consecutive observations. lag(): Creates lagged versions of a time series. acf(): Plots the autocorrelation function (ACF). pacf(): Plots the partial autocorrelation function (PACF). Key R Packages:
+
+forecast: A comprehensive package for time series forecasting. auto.arima(): Automatically selects and fits an ARIMA model. ets(): Fits exponential smoothing models. forecast(): Generates forecasts and confidence intervals. accuracy(): Evaluates forecast accuracy. tseries: Provides functions for time series analysis. adf.test(): Performs the Augmented Dickey-Fuller test for stationarity. kpss.test(): Performs the Kwiatkowski-Phillips-Schmidt-Shin test for stationarity. lubridate: For handling date and time data. ggplot2: For creating customized visualizations. Common Time Series Analysis and Forecasting Techniques:
+
+Time Series Decomposition: decompose(): Decomposes a time series into trend, seasonal, and residual components. ARIMA Models: arima(): Fits an ARIMA model. Exponential Smoothing: ets(): Fits various exponential smoothing models. Prophet: prophet(): A statistical forecasting procedure developed by Facebook’s Core Data Science team. Example Workflow:
+
+Data Preparation: Import your time series data into R. Convert it to a time series object using ts(). Explore the data using plot() and summary statistics. Data Visualization: Plot the time series to identify trends, seasonality, and cycles. Use acf() and pacf() to identify autocorrelation patterns. Model Selection: Determine the appropriate model based on the data characteristics. Use auto.arima() or ets() to automatically select the best model. Model Fitting: Fit the selected model using arima() or ets(). Forecasting: Generate forecasts using the forecast() function. Model Evaluation: Evaluate the forecast accuracy using metrics like Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE). Remember to explore the documentation of these functions and packages to fully understand their capabilities and customize your analysis.
+
+Cone of certainty, Linear and non-linear methods
+ 
+## Session 3: Analysis by decomposition {.scrollable}
+
+Trend and seasonal adjustments, establishing confidence limits, handling residues
+
+Key R Functions for Time Series Analysis and Forecasting
+
+Here are some essential R functions and packages to get you started with time series analysis and forecasting:
+
+Core R Functions:
+
+ts(): Converts a numeric vector into a time series object. plot(): Visualizes time series data. diff(): Calculates the difference between consecutive observations. lag(): Creates lagged versions of a time series. acf(): Plots the autocorrelation function (ACF). pacf(): Plots the partial autocorrelation function (PACF). Key R Packages:
+
+forecast: A comprehensive package for time series forecasting. auto.arima(): Automatically selects and fits an ARIMA model. ets(): Fits exponential smoothing models. forecast(): Generates forecasts and confidence intervals. accuracy(): Evaluates forecast accuracy. tseries: Provides functions for time series analysis. adf.test(): Performs the Augmented Dickey-Fuller test for stationarity. kpss.test(): Performs the Kwiatkowski-Phillips-Schmidt-Shin test for stationarity. lubridate: For handling date and time data. ggplot2: For creating customized visualizations. Common Time Series Analysis and Forecasting Techniques:
+
+Time Series Decomposition: decompose(): Decomposes a time series into trend, seasonal, and residual components. ARIMA Models: arima(): Fits an ARIMA model. Exponential Smoothing: ets(): Fits various exponential smoothing models. Prophet: prophet(): A statistical forecasting procedure developed by Facebook’s Core Data Science team. Example Workflow:
+
+Data Preparation: Import your time series data into R. Convert it to a time series object using ts(). Explore the data using plot() and summary statistics. Data Visualization: Plot the time series to identify trends, seasonality, and cycles. Use acf() and pacf() to identify autocorrelation patterns. Model Selection: Determine the appropriate model based on the data characteristics. Use auto.arima() or ets() to automatically select the best model. Model Fitting: Fit the selected model using arima() or ets(). Forecasting: Generate forecasts using the forecast() function. Model Evaluation: Evaluate the forecast accuracy using metrics like Mean Absolute Error (MAE), Mean Squared Error (MSE), and Root Mean Squared Error (RMSE). Remember to explore the documentation of these functions and packages to fully understand their capabilities and customize your analysis.
+
+
+
+
+
+## Descriptive Statistics Package
+
+* t.test(): Performing t-tests.
+* anova(): Performing ANOVA.
+* lm(): Fitting linear models.
+
+
+# SESSION 2: Time Series analysis
+
+
+
+[TimeSeries Analysis](https://www.geeksforgeeks.org/time-series-and-forecasting-using-r/?ref=ml_lbp)
+[TimeSeries ARIMA](https://www.geeksforgeeks.org/time-series-analysis-using-arima-model-in-r-programming/)
+
+[Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition](https://otexts.com/fpp3/)
+
+## The Process {.scrollable}
+
+1. Define the Goal
+2. Get Data
+3. Explore and Visualize Series
+4. Preprocess Data
+5. Partition Series
+6. Apply forecasting methods
+7. Evaluate and Compare Performance
+8. Implement forecast and system
+
+## The predictability of an event or a quantity depends on:
+
+* how well we understand the factors that contribute to it;
+
+* how much data is available;
+
+* how similar the future is to the past;
+
+* whether the forecasts can affect the thing we are trying to forecast.
+
+## Identify the goals for a forecast:
+
+* How frequent are the forecast required?
+
+* What needs to be determined?
+
+* How soon in advance is the forecast needed?
+
+* How often can the data be collected?
+
+## Type of Forecasting:
+
+* Qualitative forecasting:
+   * No historical data but ample information about the domain
+   * Prediction based on judgmental approach that weighs options and curbs biases
+   * Best done by a panel of those familar with the domain
+  * Confirmed by consensus and feedback on thoughts gathered anonymously 
+
+* Quantitative forecasting possible if:
+
+   * numerical information about the past is available
+   * it is safe to assume that past patterns will continue into the future
+ 
+## General model
+
+$$y_t = level + Trend + Seasonality + Noise$$
+```{r,fig.width=7,fig.height=5}
+x = c(1:200)/10
+y = 1.5*x + 8 + 5*sin(x)+rnorm(200,0,2)
+plot(x,y,pch=19,col="#00009966")
+lines(x,0*x +8,lwd=3,col="darkgreen",lty=2)
+lines(x,1.5*x+8,lwd=3,col="orange",lty=2)
+lines(x,1.5*x+8+5*sin(x),lwd=3,col="red",lty=2)
+legend(15,24,c("Level","Trend","Seasonality","Raw data"),fill=c("darkgreen","orange","red","blue"))
+
+ts = ts(y,start=c(2000,1),frequency=62)
+
+```
+
+## Decompose
+
+```{r,fig.width=5,fig.height=5}
+plot(decompose(ts))
+```
+
+
+## Reading in the data
+   
+```{r,fig.height=7,fig.width=5}   
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership,start=c(1991,1),end=c(2004,3),freq=12)
+
+plot(ridership.ts,  xlab="Time", ylab="Ridership")
+
+```
+
+
+## Decomposition of the Data
+
+```{r,fig.height=5,fig.width=7}
+
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991,1), end = c(2004, 3), freq = 12)
+ridership.lm <- tslm(ridership.ts ~ trend + I(trend^2))
+
+# Figure 2-4
+
+par(mfrow = c(2, 1))
+plot(ridership.ts, xlab = "Time", ylab = "Ridership", ylim = c(1300, 2300), bty = "l")
+lines(ridership.lm$fitted, lwd = 2)
+ridership.ts.zoom <- window(ridership.ts, start = c(1997, 1), end = c(2000, 12))
+plot(ridership.ts.zoom, xlab = "Time", ylab = "Ridership", ylim = c(1300, 2300), bty = "l")
+```
+
+
+
+## Establish the training and test sets
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+# Figure 3-1
+plot(ridership.ts, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25))
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1), digits = 2))
+lines(c(2004.25 - 3 , 2004.25 - 3), c(0, 3500))
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3,2450,1991.25,2450,code=3,length=0.1,lwd=1,angle=30)
+arrows(2004.5 - 3,2450,2004,2450,code=3,length=0.1,lwd=1,angle=30)
+arrows(2004.5,2450,2006,2450,code=3,length=0.1,lwd=1,angle=30)
+```
+## Inspecting the trend
+
+```{r,fig.height=5,fig.width=5}
+
+library(forecast)
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+stepsAhead <- 36
+nTrain <- length(ridership.ts) - stepsAhead
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + stepsAhead))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = stepsAhead, level = 0)
+
+# Figure 3-2
+plot(ridership.lm.pred, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "", flty = 2)
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1))) 
+lines(ridership.lm$fitted, lwd = 2)
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+
+```
+## Testing the performance
+
+```{r,fig.height=5,fig.width=5}
+
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+stepsAhead <- 36
+nTrain <- length(ridership.ts) - stepsAhead
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + stepsAhead))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = stepsAhead, level = 0)
+
+# Figure 3-3
+plot(ridership.lm.pred$residuals, ylim = c(-400, 500),  ylab = "Residuals", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "")
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(valid.ts - ridership.lm.pred$mean, lwd = 1)
+lines(c(2004.25 - 3, 2004.25 - 3), c(-500, 3500))
+lines(c(2004.25, 2004.25), c(-500, 3500))
+text(1996.25, 500, "Training")
+text(2002.75, 500, "Validation")
+text(2005.25, 500, "Future")
+arrows(2004 - 3, 450, 1991.25, 450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 450, 2004, 450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 450, 2006, 450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+
+## Range of Error
+
+```{r,fig.height=5,fig.width=5}
+
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+stepsAhead <- 36
+nTrain <- length(ridership.ts) - stepsAhead
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + stepsAhead))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = stepsAhead, level = 0)
+names(ridership.lm.pred)
+
+# Figure 3-4
+hist(ridership.lm.pred$residuals,  ylab = "Frequency", xlab = "Forecast Error", bty = "l", main = "")
+```
+
+
+```{r,fig.height=5,fig.width=5}
+
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+nValid <- 36
+nTrain <- length(ridership.ts) - nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = nValid, level = 95)
+
+# Figure 3-5
+plot(ridership.lm.pred, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "", flty = 2)
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(ridership.lm$fitted, lwd = 2)
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+
+## Prediction errors
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+stepsAhead <- 36
+nTrain <- length(ridership.ts) - stepsAhead
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + stepsAhead))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = stepsAhead, level = 0)
+names(ridership.lm.pred)
+
+# Figure 3-4
+hist(ridership.lm.pred$residuals,  ylab = "Frequency", xlab = "Forecast Error", bty = "l", main = "")
+```
+
+## 
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+nValid <- 36
+nTrain <- length(ridership.ts) - nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid))
+ridership.lm <-  tslm(train.ts ~ trend + I(trend^2))
+ridership.lm.pred <- forecast(ridership.lm, h = nValid, level = 95)
+
+# Figure 3-5
+plot(ridership.lm.pred, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "", flty = 2)
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(ridership.lm$fitted, lwd = 2)
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+
+## Comparing the prediction to the actual
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+fixed.nValid <- 36
+fixed.nTrain <- length(ridership.ts) - fixed.nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, fixed.nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, fixed.nTrain + 1), end = c(1991, fixed.nTrain + fixed.nValid))
+naive.fixed <- naive(train.ts, h = fixed.nValid)
+naive.roll <- ts(Amtrak.data$Ridership[fixed.nTrain:(fixed.nTrain + fixed.nValid - 1)], start = c(1991, fixed.nTrain + 1), end = c(1991, fixed.nTrain + fixed.nValid), freq = 12)
+
+# Figure 3-6
+plot(train.ts, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "")
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(naive.fixed$mean, lwd = 2, col = "cyan", lty = 2)
+lines(naive.roll, lwd = 2, col = "blue", lty = 2)
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+
+
+##
+
+```{r,fig.height=5,fig.width=5}
+library(forecast) 
+
+tumblr.data <- read.csv("Tumblr.csv")
+people.ts <- ts(tumblr.data$People.Worldwide) / 1000000
+
+# Run three exponential smoothing models: AAN, MMN, and MMdN.
+# MMN stands for Multiplicative error, Multiplicative trend, and No seasonality. MMdN stands for Multiplicative error, Multiplicative damped trend, and No seasonality.
+people.ets.AAN <- ets(people.ts, model = "AAN")
+people.ets.MMN <- ets(people.ts, model = "MMN", damped = FALSE)
+people.ets.MMdN <- ets(people.ts, model = "MMN", damped = TRUE)
+
+# Create their prediction "cones" for 115 months into the future (Jun 2013 to Dec 2022).
+people.ets.AAN.pred <- forecast(people.ets.AAN, h = 115, level = c(0.2, 0.4, 0.6, 0.8))
+people.ets.MMN.pred <- forecast(people.ets.MMN, h = 115, level = c(0.2, 0.4, 0.6, 0.8))
+people.ets.MMdN.pred <- forecast(people.ets.MMdN, h = 115, level = c(0.2, 0.4, 0.6, 0.8))
+
+# Compare the three models' "forecast cones" visually.
+
+par(mfrow = c(1, 3)) # This command sets the plot window to show 1 row of 3 plots.
+plot(people.ets.AAN.pred, xlab = "Month", ylab = "People (in millions)", ylim = c(0, 1000))
+plot(people.ets.MMN.pred, xlab = "Month", ylab="People (in millions)", ylim = c(0, 1000))
+plot(people.ets.MMdN.pred, xlab = "Month", ylab="People (in millions)", ylim = c(0, 1000))
+
+# Examine the lower and upper limits of the MMN model's prediction cones.
+people.ets.MMN.pred$lower 
+```
+
+
+## Smoothing
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+ma.trailing <- rollmean(ridership.ts, k = 12, align = "right")
+ma.centered <- ma(ridership.ts, order = 12)
+
+# Figure 5-2
+plot(ridership.ts, ylim = c(1300, 2200),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", 
+     xlim = c(1991,2004.25), main = "")
+axis(1, at = seq(1991, 2004.25, 1), labels = format(seq(1991, 2004.25, 1)))
+lines(ma.centered, lwd = 2)
+lines(ma.trailing, lwd = 2, lty = 2)
+legend(1994,2200, c("Ridership","Centered Moving Average", "Trailing Moving Average"), lty=c(1,1,2), lwd=c(1,2,2), bty = "n")  
+```
+## Data Smoothing
+
+```{r,fig.height=5,fig.width=5}
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+nValid <- 36
+nTrain <- length(ridership.ts) - nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid))
+ma.trailing <- rollmean(train.ts, k = 12, align = "right")
+last.ma <- tail(ma.trailing, 1)
+ma.trailing.pred <- ts(rep(last.ma, nValid), start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid), freq = 12)
+
+# Figure 5-3
+plot(train.ts, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "")
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(ma.trailing, lwd = 2) 
+lines(ma.trailing.pred, lwd = 2, col = "blue", lty = 2) 
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+
+## Data Smoothing
+
+```{r,fig.height=5,fig.width=5}
+
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+# Figure 5-4
+par(mfrow = c(2,2))
+plot(ridership.ts, ylab = "Ridership", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Ridership")
+plot(diff(ridership.ts, lag = 12), ylab = "Lag-12", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Lag-12 Difference")
+plot(diff(ridership.ts, lag = 1), ylab = "Lag-1", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Lag-1 Difference")
+plot(diff(diff(ridership.ts, lag = 12), lag = 1), ylab = "Lag-12, then Lag-1", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Twice-Differenced (Lag-12, Lag-1)")
+dev.off()
+
+ridership.deseasonalized <- diff(ridership.ts, lag = 12)
+summary(tslm(ridership.deseasonalized ~ trend))
+
+```
+
+```{r,fig.height=5,fig.width=7}
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+nValid <- 36
+nTrain <- length(ridership.ts) - nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid))
+
+hwin <- ets(train.ts, model = "MAA")
+hwin.pred <- forecast(hwin, h = nValid, level = 0)
+
+# Figure 5.6
+plot(hwin.pred, ylim = c(1300, 2600),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "", flty = 2)
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(hwin.pred$fitted, lwd = 2, col = "blue")
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2500, "Training")
+text(2002.75, 2500, "Validation")
+text(2005.25, 2500, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+
+# Table 5.2
+hwin
+hwin$states[1, ]  # Initial states
+hwin$states[nrow(hwin$states), ]  # Final states
+hwin$states
+
+# Table 5.4
+ets.opt <- ets(train.ts, restrict = FALSE, allow.multiplicative.trend = TRUE)
+
+# Table 5.5
+ets.opt.pred <- forecast(ets.opt, h = nValid, level = 0)
+plot(ets.opt.pred)
+accuracy(hwin.pred, valid.ts)
+accuracy(ets.opt.pred, valid.ts)
+
+```
+
+
+## Lag check
+
+```{r,fig.width=5,fig.height=7}
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+# Figure 5-4
+par(mfrow = c(2,2))
+plot(ridership.ts, ylab = "Ridership", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Ridership")
+plot(diff(ridership.ts, lag = 12), ylab = "Lag-12", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Lag-12 Difference")
+plot(diff(ridership.ts, lag = 1), ylab = "Lag-1", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Lag-1 Difference")
+plot(diff(diff(ridership.ts, lag = 12), lag = 1), ylab = "Lag-12, then Lag-1", xlab = "Time", bty = "l", xlim = c(1991,2004.25), main = "Twice-Differenced (Lag-12, Lag-1)")
+
+                             ridership.deseasonalized <- diff(ridership.ts, lag = 12)
+summary(tslm(ridership.deseasonalized ~ trend))
+                                 
+                                 
+```
+## Regression Fitting
+
+```{r,fig.height=5,fig.width=7}
+library(forecast)
+library(zoo)
+
+Amtrak.data <- read.csv("Amtrak.csv")
+ridership.ts <- ts(Amtrak.data$Ridership, start = c(1991, 1), end = c(2004, 3), freq = 12)
+
+nValid <- 36
+nTrain <- length(ridership.ts) - nValid
+train.ts <- window(ridership.ts, start = c(1991, 1), end = c(1991, nTrain))
+valid.ts <- window(ridership.ts, start = c(1991, nTrain + 1), end = c(1991, nTrain + nValid))
+
+train.lm.trend.season <- tslm(train.ts ~ trend + I(trend^2) + season)
+train.lm.trend.season.pred <- forecast(train.lm.trend.season, h = nValid, level = 0)
+
+# Table 6-4
+summary(train.lm.trend.season)
+
+# Figure 6-7
+par(mfrow = c(2,1))
+plot(train.lm.trend.season.pred, ylim = c(1300, 2625),  ylab = "Ridership", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "", flty = 2)
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(train.lm.trend.season.pred$fitted, lwd = 2, col = "blue")
+lines(valid.ts)
+lines(c(2004.25 - 3, 2004.25 - 3), c(0, 3500)) 
+lines(c(2004.25, 2004.25), c(0, 3500))
+text(1996.25, 2600, "Training")
+text(2002.75, 2600, "Validation")
+text(2005.25, 2600, "Future")
+arrows(2004 - 3, 2450, 1991.25, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 2450, 2004, 2450, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 2450, 2006, 2450, code = 3, length = 0.1, lwd = 1, angle = 30)
+```
+plot(train.lm.trend.season.pred$residuals, ylim = c(-400, 550),  ylab = "Residuals", xlab = "Time", bty = "l", xaxt = "n", xlim = c(1991,2006.25), main = "")
+axis(1, at = seq(1991, 2006, 1), labels = format(seq(1991, 2006, 1)))
+lines(train.ts - train.lm.trend.season.pred$fitted)
+lines(valid.ts - train.lm.trend.season.pred$mean)
+lines(c(2004.25 - 3, 2004.25 - 3), c(-500, 3500))
+lines(c(2004.25, 2004.25), c(-500, 3500))
+text(1996.25, 525, "Training")
+text(2002.75, 525, "Validation")
+text(2005.25, 525, "Future")
+arrows(2004 - 3, 425, 1991.25, 425, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5 - 3, 425, 2004, 425, code = 3, length = 0.1, lwd = 1,angle = 30)
+arrows(2004.5, 425, 2006, 425, code = 3, length = 0.1, lwd = 1, angle = 30)
+
+
+
+
+
+
+## Core R Functions for Time series:
+
+* ts(): Converts a numeric vector into a time series object. 
+* plot(): Visualizes time series data. 
+* diff(): Calculates the difference between consecutive observations. 
+* lag(): Creates lagged versions of a time series. 
+* acf(): Plots the autocorrelation function (ACF). * pacf(): Plots the partial autocorrelation function (PACF). 
+
+## forecast: A package for time series forecasting. 
+* auto.arima(): Automatically selects and fits an ARIMA model.
+* ets(): Fits exponential smoothing models.
+* forecast(): Generates forecasts and confidence intervals.
+
+
+
+
+## An example: Mulberry data
+
+* Collect the number of mulberrys picked each day from the garden
+
+
+
+```{r,fig.width=7,fig.height=5}
+a1 = -0.000652141
+a2 = 0.100174
+a3 = 0.0537469
+a4 = 0.230219
+a5 = 0.0357811
+ 
+a = 0.00724636
+b = 0.0677452
+x= 1:150
+x2 = x*x
+x3 = x*x*x
+
+yy = (a1*x3 + a2*x2 + a3*x +a4)*exp(-a5*x)
+
+y = a*x3*exp(-b*x)
+y1 = as.integer(y* runif(length(y),0.85,1.15))
+y0 = y1[46:100]
+x0 = x[46:100]
+lm = lm(y0 ~ x0)
+xx = summary(lm)
+coef = xx$coefficients
+y00 = y1[1:45]
+x00 = x[1:45]
+lm2 = lm(y00 ~ x00)
+xxx = summary(lm2)
+coef2 = xxx$coefficients
+
+plot(x,y1,pch=19,
+     col="#0000ff99",
+     xlab="Days after transplanting",
+     ylab="Mulberry yield",
+     main="Berry yield after transplant",cex=0.5)
+```
+
+
+## Apply different models:
+
+   * Biphasic linear model:
+
+$$\hat y=\left[\begin{matrix}\left(x\le45\right)&:&−6+1.04x\\
+\left(x>45\right)&:&53−0.45x\\\end{matrix}\right.$$
+
+   * Polynomial model:
+
+$$\hat y=3.7x^3−8.6x^2+15.7x−7.8$$
+
+   * Simple surge model:
+   
+$$\hat y=0.006x^3\ e^{−0.06x}$$
+   
+   * Polynominal surge:
+$$\hat y=\left(0.004x^3−0.033x^2−0.25x+0.12\right)e^{−0.06x}$$
+
+## Comparison of models
+
+* **Mean Absolute Deviation:**
+
+$$MAD=\frac{1}{n}\sum^{n}_{i=1} abs\left(\hat Y_i−Y_i\right)$$
+
+* **Mean Square Error:**
+
+$$MSE=\frac{1}{n} \sum _{i=1}^n  \left(\hat Y_i − Y_i\right)^2$$
+
+
+
+```{r,fig.width=7,fig.height=5}
+plot(x,y1,pch=19,
+     col="#0000ff99",
+     xlab="Days after transplanting",
+     ylab="Mulberry yield",
+     main="Berry yield after transplant",cex=0.5)
+l1 = 1.04*x - 6
+l2 = 53-0.45*x 
+l0 = c(l1[1:40],l2[41:150])
+lines(x,l0,lwd=2,col="green")
+lines(x,y,lwd=2,col="red")
+```
+/**
+     * Biphasic linear model:
+
+$$\hat y=\left[\begin{matrix}\left(x\le45\right)&:&−6+31x\\
+\left(x>45\right)&:&44−27x\\\end{matrix}\right.$$
+
+   * Polynomial model:
+
+$$\hat y=3.7x^3−8.6x^2+15.7x−7.8$$
+
+   * Simple surge model:
+   
+$$\hat y=0.006x^3\ e^{−0.06x}$$
+   
+   * Polynominal surge:
+$$\hat y=\left(0.004x^3−0.033x^2−0.25x+0.12\right)e^{−0.06x}$$
+
+**/  
+```
+
+
+
+
+
+# SESSION 3:  Regression analysis
+
+# SESSION 4: Data Smoothing and ARIMA
+
+
+
+* SESSION 4: Data Smoothing and ARIMA
+
+
+
+
+# EXAMPLES
+
+## Brooklyn Bridge Pedestrian Traffic
+
+![](brooklynbridge.jpg){width="20%"}
+![](Brooklyn-Bridge-9.jpg){width=20%}
+![](Brooklyn-Bridge-1.jpg){width=20%}
+![](Brooklyn-Bridge-3.webp){width=20%}
+
+* built 1868-1883 as the first steel-wire suspension bridge in the world.
+
+* Average daily traffic: 116,000 cars, 3,000 cyclists, and 30,000 pedestrians (measured automatically)
+* 1.8 km long crossing talks 20-30 min walk, 6-10 min by bicycle, 1-2 min by car
+
+
+## Brooklyn Bridge Datasets
+
+* Pedestrian: [NYC Open Data:](https://data.cityofnewyork.us/Transportation/Brooklyn-Bridge-Automated-Pedestrian-Counts-Demons/6fi9-q3ta/about_data) Automated Pedestrian Count Data comes from a test of automated technology to count pedestrians coming and leaving from the Manhattan approach to the Brooklyn Pedestrian Bridge.
+
+* Cyclists: [NYC Open Data:](https://data.cityofnewyork.us/Transportation/Bicycle-Counts/uczf-rk3c/about_data) Bicycle-Counts Bicycle counts conducted around New York City at key locations. The data have lapses due to transmission issues cause by weather, connection interruptions, equipment malfunctions, vandalism, etc.
+
+
+
+
+
+## Mulberry production
+
+```{r,fig.width=7,fig.height=5}
+a1 = -0.000652141
+a2 = 0.100174
+a3 = 0.0537469
+a4 = 0.230219
+a5 = 0.0357811
+ 
+a = 0.00724636
+b = 0.0677452
+x= 1:150
+x2 = x*x
+x3 = x*x*x
+
+yy = (a1*x3 + a2*x2 + a3*x +a4)*exp(-a5*x)
+
+y = a*x3*exp(-b*x)
+y1 = as.integer(y* runif(length(y),0.85,1.15))
+y0 = y1[46:100]
+x0 = x[46:100]
+lm = lm(y0 ~ x0)
+xx = summary(lm)
+coef = xx$coefficients
+y00 = y1[1:45]
+x00 = x[1:45]
+lm2 = lm(y00 ~ x00)
+xxx = summary(lm2)
+coef2 = xxx$coefficients
+
+plot(x,y1,pch=".",
+     col="#0000ff33",
+     xlab="Days after transplanting",ylim=c(0,40),
+     ylab="Mulberry yield",
+     main="Berry yield after transplant",cex=0.5)
+
+
+
+coef =  xx$coefficients
+
+yh = (coef[1] + (6*coef[3])) + (coef[2] - (4*coef[4])) * x
+
+yl = (coef[1] - (6* coef[3])) + (coef[2] + (3*coef[4]))* x
+
+
+yyl = (coef2[1] - (3* coef2[3])) + (coef2[2] - (3*coef2[4]))* x
+
+yyh = (coef2[1] + (4*coef2[3])) + (coef2[2] + (4*coef2[4])) * x
+
+ym = coef[1] + (coef[2] * x)
+
+yym = coef2[1] + (coef2[2] * x)
+
+
+
+polygon(c(x[1:43],x[48:100],rev(c(x[1:43],x[48:100]))),c(yyh[1:43],yh[48:100],rev(c(yyl[1:43],yl[48:100]))),col="#FFCCCCCC",border="#FF9999")
+
+
+lines(x,y,col="red",lty=3,lwd=2)
+abline(lm,col="darkgreen",lwd=2,lty=3)
+
+abline(lm2,col="darkgreen",lwd=2,lty=3)
+y3 = c(predict(lm2),predict(lm))
+points(x,y1,col="#9999FF",pch=19)
+# points(x,y3,col="#99FFFF20",pch=19)
+
+
+```
+
+## Comparison of Models {.scrollable}
+
+<small>
+
+```{r}
+cm = cbind(3:100,as.integer(y1),as.integer(ym),as.integer(y))
+colnames(cm) = c("Days", "RawData","Linear","Surge") # Polynomial #Polynomial Surge
+cm = rbind(cm,
+  c(98,"Sum", sum(cm[,3]),
+    sum(cm[,4])),
+  c(98,"MAD",
+round(sum(abs(cm[,1] - cm[,3])/98),1),
+round(sum(abs(cm[,1] - cm[,4])/98),1)))
+
+knitr::kable(cm)
+
+```
+
+</small>
+
+
+## Brooklyn Bridge Pedestrian Traffic
+
+![Brooklyn Bridge](Brooklyn-Bridge-2.jpg){width=20%}
+<img src="Brooklyn-Bridge-3.webp" width="20%" align="right"/> <img src="Brooklyn-Bridge-1.jpg" width="20%" align="right"/> <img src="Brooklyn-Bridge-9.jpg" width="20%" align="right"/>
+
+-   built 1868-1883 as the first steel-wire suspension bridge in the world.
+-   Average daily traffic: 116,000 cars, 3,000 cyclists, and 30,000 pedestrians (measured automatically)
+-   1.8 km long crossing talks 20-30 min walk, 6-10 min by bicycle, 1-2 min by car
+
+## Brooklyn Bridge Datasets
+
+-   Pedestrian: [NYC Open Data: Automated Pedestrian Count](https://data.cityofnewyork.us/Transportation/Brooklyn-Bridge-Automated-Pedestrian-Counts-Demons/6fi9-q3ta/about_data) Data comes from a  test of automated technology to count pedestrians coming and leaving from the Manhattan approach to the Brooklyn Pedestrian Bridge.
+
+-   Cyclists:
+[NYC Open Data: Bicycle-Counts](https://data.cityofnewyork.us/Transportation/Bicycle-Counts/uczf-rk3c) 
+Bicycle counts conducted around New York City at key locations. 
+The data have lapses due to transmission issues cause by weather, connection interruptions, equipment malfunctions, vandalism, etc. NY City makes no guarantees as to the accuracy of the content.
